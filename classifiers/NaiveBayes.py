@@ -1,11 +1,13 @@
 from typing import List
 import numpy as np
-import scipy 
+import scipy
+
+from classifiers.LearningClass import LearningClass 
 
 # rng = np.random.default_rng(12345)
 rng = np.random.default_rng()
 
-class NaiveBayes:
+class NaiveBayes(LearningClass):
     def __init__(self, data: List[str], labels: List[int], split:float = 0.8):
         elements = data.shape[0]
         if(elements != labels.shape[0]):
@@ -72,18 +74,3 @@ class NaiveBayes:
             log_probs[c] = log_prob
         
         return max(log_probs, key=log_probs.get)
-
-    def evaluate(self):
-        correct = 0
-        total = 0
-        print(f"Evaluating with {self.test_X.shape[0]} samples")
-        
-        for i, x in enumerate(self.test_X):
-            prediction = self.predict(x)
-            # print(f"Predicted {prediction}, actual {self.test_Y[i]}")
-            if prediction == self.test_Y[i]:
-                correct += 1
-            total += 1
-        
-        print(f"Accuracy: {correct / total}")
-        return correct, total

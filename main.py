@@ -5,6 +5,8 @@ import numpy as np
 import os
 import re
 from classifiers.NaiveBayes import NaiveBayes
+from classifiers.KNearestNeighbor import KNearestNeighbor
+from classifiers.DecisionTrees import DecisionTrees
 
 class Vectorizer:
     def __init__(self, dictionaries: List[Dict[str, int]]):
@@ -56,5 +58,8 @@ if __name__ == '__main__':
     X = np.array([vectorizer.transform(email) for email in emails])
     Y = np.array(labels)
     
-    classifier = NaiveBayes(X, Y)
+    # classifier = KNearestNeighbor(X, Y)
+    # classifier.evaluate()
+    
+    classifier = DecisionTrees(X, Y)
     classifier.evaluate()
